@@ -1,22 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dpiza <dpiza@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/08/11 13:52:00 by dpiza             #+#    #+#             */
-/*   Updated: 2021/08/12 19:49:52 by dpiza            ###   ########.fr       */
+/*   Created: 2021/05/24 15:14:08 by dpiza             #+#    #+#             */
+/*   Updated: 2021/05/31 12:28:34 by dpiza            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include "libft.h"
 
-#include <stdarg.h>
-#include <unistd.h>
-#include "libft/libft.h"
+size_t	ft_strlcat(char *dst, const char *src, size_t size)
+{
+	size_t	isize;
 
-int ft_printf(const char *, ...);
-
-#endif
+	isize = 0;
+	while (*dst && isize < size)
+	{
+		isize++;
+		dst++;
+	}
+	while (*src && isize + 1 < size)
+	{
+		*dst++ = *src++;
+		isize++;
+	}
+	if (isize < size)
+		*dst = '\0';
+	while (*src++)
+		isize++;
+	return (isize);
+}

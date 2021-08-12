@@ -6,7 +6,7 @@
 /*   By: dpiza <dpiza@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/11 13:21:03 by dpiza             #+#    #+#             */
-/*   Updated: 2021/08/12 18:24:39 by dpiza            ###   ########.fr       */
+/*   Updated: 2021/08/12 20:12:38 by dpiza            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	main(void)
 	ft_printf("FT: vInt01i: %i\n\n", vInt01);
 	printf("OG: vInt01u: %u\n", vInt01);
 	ft_printf("FT: vInt01u: %u\n\n", vInt01);
-	printf("OG: vInt01d: %d\n", vInt02);
+	printf("OG: vInt02d: %d\n", vInt02);
 	ft_printf("FT: vInt02d: %d\n\n", vInt02);
 	printf("OG: vInt02i: %i\n", vInt02);
 	ft_printf("FT: vInt02i: %i\n\n", vInt02);
@@ -46,11 +46,14 @@ int	main(void)
 	ft_printf("FT: vInt02u: %u\n\n", vInt02);
 	printf("OG: %%%%%%%%\n");
 	ft_printf("FT: %%%%%%%%\n\n");
-	printf("OG: Duas flags: %s %p\n", vChar02, vChar02);
-	ft_printf("FT: Duas flags: %s %p\n\n", vChar02, vChar02);
 	printf("OG: vInt01x: %x\n", vInt01);
-	ft_printf("FT: vInt01x: %x\n", vInt01);
-	// printf("vInt01d: %d\nvInt01i: %i\nvInt01u: %u\nvInt01x: %x\n", vInt01, vInt01, vInt01, vInt01);
+	ft_printf("FT: vInt01x: %x\n\n", vInt01);
+	printf("OG: vInt01x: %X\n", vInt01);
+	ft_printf("FT: vInt01x: %X\n\n", vInt01);
+	printf("OG: Tres flags: String: %s Endereço: %p Hex: %x\n", vChar02, vChar02, vInt01);
+	ft_printf("FT: Tres flags: String: %s Endereço: %p Hex: %x\n", vChar02, vChar02, vInt01);
+	// printf("OG: vChar01c: %c vChar02s: %s vChar02p: %p vChar03s: %s vChar03p: %p vInt01d: %d vInt01i: %i vInt01u: %u vInt01x: %x %%%%%%%%\n", vChar01, vChar02, vChar02, vChar03, vChar03, vInt01, vInt01, vInt01, vInt01);
+	// ft_printf("FT: vChar01c: %c vChar02s: %s vChar02p: %p vChar03s: %s vChar03p: %p vInt01d: %d vInt01i: %i vInt01u: %u vInt01x: %x %%%%%%%%\n", vChar01, vChar02, vChar02, vChar03, vChar03, vInt01, vInt01, vInt01, vInt01);
 	// printf("vInt01x: %x\n", vInt01);
 	// ft_printfr("Uma variável: %sl\n", vChar03);
 	// printf("vDoub01f: %f\n", vDoub01);

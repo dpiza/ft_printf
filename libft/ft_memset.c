@@ -1,22 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dpiza <dpiza@student.42sp.org.br>          +#+  +:+       +#+        */
+/*   By: dpiza <dpiza@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/08/11 13:52:00 by dpiza             #+#    #+#             */
-/*   Updated: 2021/08/12 19:49:52 by dpiza            ###   ########.fr       */
+/*   Created: 2021/05/20 19:55:03 by dpiza            #+#    #+#             */
+/*   Updated: 2021/05/20 19:55:03 by dpiza           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include "libft.h"
 
-#include <stdarg.h>
-#include <unistd.h>
-#include "libft/libft.h"
+void	*ft_memset(void *s, int c, size_t n)
+{
+	char	*p;
 
-int ft_printf(const char *, ...);
-
-#endif
+	p = s;
+	while (n > 0)
+	{
+		*p = c;
+		p++;
+		n--;
+	}
+	return (s);
+}
