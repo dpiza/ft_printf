@@ -6,7 +6,7 @@
 /*   By: dpiza <dpiza@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/11 13:50:14 by dpiza             #+#    #+#             */
-/*   Updated: 2021/08/12 18:37:48 by dpiza            ###   ########.fr       */
+/*   Updated: 2021/08/12 19:33:37 by dpiza            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ int	ft_printf(const char *arr, ...)
 	va_list args;
 	char *ret;
 	
-	va_start(args, *arr);
+	va_start(args, arr);
 	while (*arr)
 	{
 		if (*arr == '%')
@@ -116,14 +116,16 @@ int	ft_printf(const char *arr, ...)
 			else if (*arr == 'p')							// %p The void * pointer argument is printed in hexadecimal.
 			{
 				ret = va_arg(args, char*);
-				ft_print_hex_address((unsigned char*)&ret);
+				// ft_print_hex_address((unsigned char*)&ret);
+				ft_putstr("0x");
+				ft_putnbr_base((unsigned long long)ret, "0123456789abcdef"); // Todo
 			}
 			else if (*arr == 'd' || *arr == 'i')			// %d print a decimal (base 10) number. • %i print an integer in base 10.
-				ft_putnbr(va_arg(args, int));
+				ft_putnbr_base(va_arg(args, int), "0123456789");
 			else if (*arr == 'u')							// %u print an unsigned decimal (base 10) number
-				ft_putnbr((long)va_arg(args, unsigned int));
+				ft_putnbr_base((long)va_arg(args, unsigned int), "0123456789");
 			else if (*arr == 'x')							// %x print a number in hexadecimal (base 16).
-				ft_putnbrx(va_arg(args, unsigned int)); // Todo
+				ft_putnbr_base(va_arg(args, long), "0123456789abcdef"); // Todo
 			else if (*arr == '%')							// %% print a percent sign
 				ft_putchar('%');
 		}
