@@ -6,7 +6,7 @@
 /*   By: dpiza <dpiza@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/11 13:21:03 by dpiza             #+#    #+#             */
-/*   Updated: 2021/08/12 20:12:38 by dpiza            ###   ########.fr       */
+/*   Updated: 2021/08/13 15:21:44 by dpiza            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,17 @@ int	main(void)
 	char *vChar03 = "Outra String";
 	int vInt01 = 87263;
 	int vInt02 = -87263;
+	int retorno;
 	// double vDoub01 = 872.63;
 
-	printf("OG: vChar01c: %c\n", vChar01);
-	ft_printf("FT: vChar01c: %c\n\n", vChar01);
-	printf("OG: vChar02s: %s\n", vChar02);
-	ft_printf("FT: vChar02s: %s\n\n", vChar02);
+	retorno = printf("OG: vChar01c: %c ", vChar01);
+	printf("Retorno: %d\n", retorno);
+	retorno = ft_printf("FT: vChar01c: %c ", vChar01);
+	printf("Retorno: %d\n\n", retorno);
+	retorno = printf("OG: vChar02s: %s ", vChar02);
+	printf("Retorno: %d\n", retorno);
+	retorno = ft_printf("FT: vChar02s: %s ", vChar02);
+	printf("Retorno: %d\n\n", retorno);
 	printf("OG: vChar02p: %p\n", vChar02);
 	ft_printf("FT: vChar02p: %p\n\n", vChar02);
 	printf("OG: vChar03s: %s\n", vChar03);
@@ -48,8 +53,8 @@ int	main(void)
 	ft_printf("FT: %%%%%%%%\n\n");
 	printf("OG: vInt01x: %x\n", vInt01);
 	ft_printf("FT: vInt01x: %x\n\n", vInt01);
-	printf("OG: vInt01x: %X\n", vInt01);
-	ft_printf("FT: vInt01x: %X\n\n", vInt01);
+	printf("OG: vInt01X: %X\n", vInt01);
+	ft_printf("FT: vInt01X: %X\n\n", vInt01);
 	printf("OG: Tres flags: String: %s Endereço: %p Hex: %x\n", vChar02, vChar02, vInt01);
 	ft_printf("FT: Tres flags: String: %s Endereço: %p Hex: %x\n", vChar02, vChar02, vInt01);
 	// printf("OG: vChar01c: %c vChar02s: %s vChar02p: %p vChar03s: %s vChar03p: %p vInt01d: %d vInt01i: %i vInt01u: %u vInt01x: %x %%%%%%%%\n", vChar01, vChar02, vChar02, vChar03, vChar03, vInt01, vInt01, vInt01, vInt01);

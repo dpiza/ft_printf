@@ -6,12 +6,13 @@
 /*   By: dpiza <dpiza@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/11 13:50:14 by dpiza             #+#    #+#             */
-/*   Updated: 2021/08/12 20:42:26 by dpiza            ###   ########.fr       */
+/*   Updated: 2021/08/13 15:45:17 by dpiza            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-void	ft_print_flag(char c, va_list args)
+
+void	check_flag(char c, va_list args)
 {
 	if (c == 'c')								// %c print a single character.
 		ft_putchar_fd(va_arg(args, int), 1);
@@ -37,37 +38,24 @@ void	ft_print_flag(char c, va_list args)
 int	ft_printf(const char *arr, ...)
 {
 	va_list args;
+	int	i;
 	
+	i = 0;
 	va_start(args, arr);
 	while (*arr)
 	{
 		if (*arr == '%')
 		{
 			arr++;
-			ft_print_flag(*arr, args);
-			// if (*arr == 'c')								// %c print a single character.
-			// 	ft_putchar_fd(va_arg(args, int), 1);
-			// else if (*arr == 's')							// %s print a string of characters.
-			// 	ft_putstr_fd(va_arg(args, char*), 1);
-			// else if (*arr == 'p')							// %p The void * pointer argument is printed in hexadecimal.
-			// {
-			// 	ft_putstr_fd("0x", 1);
-			// 	ft_putnbr_base((unsigned long long)va_arg(args, char*), "0123456789abcdef"); // Todo
-			// }
-			// else if (*arr == 'd' || *arr == 'i')			// %d print a decimal (base 10) number. • %i print an integer in base 10.
-			// 	ft_putnbr_base(va_arg(args, int), "0123456789");
-			// else if (*arr == 'u')							// %u print an unsigned decimal (base 10) number
-			// 	ft_putnbr_base((long)va_arg(args, unsigned int), "0123456789");
-			// else if (*arr == 'x')							// %x print a number in hexadecimal (base 16).
-			// 	ft_putnbr_base(va_arg(args, long), "0123456789abcdef");
-			// else if (*arr == 'X')							// %x print a number in hexadecimal (base 16).
-			// 	ft_putnbr_base(va_arg(args, long), "0123456789ABCDEF");
-			// else if (*arr == '%')							// %% print a percent sign
-			// 	ft_putchar_fd('%', 1);
+			i++;
+			check_flag(*arr, args);
 		}
 		else
+		{
 			ft_putchar_fd(*arr, 1);
+			i++;
+		}
 		arr++;
 	}
-	return (0);
+	return (i);
 }
