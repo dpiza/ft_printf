@@ -1,34 +1,40 @@
-CFLAGS = -Wall -Wextra -Werror
-CC = gcc $(CFLAGS)
-LEAKCHECK = -g -fsanitize=address
-RM = rm -f
-NAME = libftprintf.a
-DEPS = ft_printf.h
-
-SRCS_FILES = ft_printf.c
 SRCS_DIR = ./src
 OBJS_DIR = ./obj
+LIBFT_DIR = ./libft
+
+CFLAGS = -Wall -Wextra -Werror
+LEAKCHECK = -g -fsanitize=address
+CC = gcc $(CFLAGS)
+RM = rm -f
+
+NAME = libftprintf.a
+
+SRCS_FILES = ft_printf.c
+SRCS = $(addprefix $(SRCS_DIR)/, $(SRCS_FILES))
 
 HEADERS_FILES = ft_printf.h
 HEADERS = $(addprefix $(SRCS_DIR)/, $(HEADERS_FILES))
 
-SRCS = $(addprefix $(SRCS_DIR)/, $(SRCS_FILES))
+
 OBJS_FILES = ${SRCS_FILES:.c=.o}
 OBJS = $(addprefix $(OBJS_DIR)/, $(OBJS_FILES))
-LIBFT_DIR = ./libft
+
 LIBFT = $(LIBFT_DIR)/libft.a
 
 all: $(NAME) 
 
-$(NAME): $(LIBFT) $(OBJS)
+$(NAME): $(LIBFT) $(OBJS_DIR) $(OBJS)
 	cp $(LIBFT) $(NAME)
 	ar rcs $(NAME) $(OBJS)
 
 $(LIBFT):
 	make -C $(LIBFT_DIR)
 
+$(OBJS_DIR):
+	mkdir -p $(OBJS_DIR)
+
 ${OBJS_DIR}/%.o: $(SRCS_DIR)/%.c $(HEADERS)
-	$(CC) -I ./libft -c $< -o $@
+	$(CC) -I./libft -I./src -c $< -o $@
 
 test: $(NAME) $(HEADERS)
 	$(CC) $(LEAKCHECK) main.c -L. -I $(SRCS_DIR) -lftprintf
@@ -41,6 +47,7 @@ clean:
 fclean: clean
 	make -C $(LIBFT_DIR) fclean
 	$(RM) $(NAME)
+	rmdir $(OBJS_DIR)
 
 re: fclean all
 

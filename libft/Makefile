@@ -15,15 +15,18 @@ SRCS_FILES = ft_strncmp.c ft_memcpy.c ft_memchr.c ft_atoi.c ft_isascii.c ft_strn
 
 SRCS = $(addprefix $(SRCS_DIR)/, $(SRCS_FILES))
 
-OBJS_FILES = ${SRCS_FILES:.c=.o}
+OBJS_FILES = $(SRCS_FILES:.c=.o)
 OBJS = $(addprefix $(OBJS_DIR)/, $(OBJS_FILES))
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
+$(NAME): $(OBJS_DIR) $(OBJS)
 	ar rcs $(NAME) $(OBJS)
 
-${OBJS_DIR}/%.o: $(SRCS_DIR)/%.c $(DEPS)
+$(OBJS_DIR):
+	mkdir -p $(OBJS_DIR)
+
+$(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c $(DEPS)
 	$(CC) $(FLAGS) -I ./ -c $< -o $@
 
 clean:
@@ -31,6 +34,7 @@ clean:
 
 fclean: clean
 	$(RM) $(NAME)
+	rmdir $(OBJS_DIR)
 
 re: fclean all
 
