@@ -6,7 +6,7 @@
 /*   By: dpiza <dpiza@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/02 12:38:37 by dpiza             #+#    #+#             */
-/*   Updated: 2021/06/03 20:21:45 by dpiza            ###   ########.fr       */
+/*   Updated: 2021/08/19 19:39:35 by dpiza            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int	ft_intlen(long n)
 	return (len);
 }
 
-static int	ft_isnegative(int n)
+static int	ft_isnegative(long n)
 {
 	if (n < 0)
 		return (1);
@@ -35,7 +35,7 @@ static int	ft_isnegative(int n)
 		return (0);
 }
 
-char	*ft_itoa(int n)
+char	*ft_itoa(long n)
 {
 	char	*ret;
 	int		negative;

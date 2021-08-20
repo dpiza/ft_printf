@@ -9,7 +9,7 @@ RM = rm -f
 
 NAME = libftprintf.a
 
-SRCS_FILES = ft_printf.c
+SRCS_FILES = ft_printf.c flag_parse.c format_string.c format_nbr_string.c
 SRCS = $(addprefix $(SRCS_DIR)/, $(SRCS_FILES))
 
 HEADERS_FILES = ft_printf.h

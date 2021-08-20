@@ -6,56 +6,116 @@
 /*   By: dpiza <dpiza@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/11 13:50:14 by dpiza             #+#    #+#             */
-/*   Updated: 2021/08/13 15:45:17 by dpiza            ###   ########.fr       */
+/*   Updated: 2021/08/19 20:50:13 by dpiza            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	check_flag(char c, va_list args)
+int	add_char(char **str, char c)
 {
-	if (c == 'c')								// %c print a single character.
-		ft_putchar_fd(va_arg(args, int), 1);
-	else if (c == 's')							// %s print a string of characters.
-		ft_putstr_fd(va_arg(args, char*), 1);
-	else if (c == 'p')							// %p The void * pointer argument is printed in hexadecimal.
-	{
-		ft_putstr_fd("0x", 1);
-		ft_putnbr_base((unsigned long long)va_arg(args, char*), "0123456789abcdef");
-	}
-	else if (c == 'd' || c == 'i')				// %d print a decimal (base 10) number. • %i print an integer in base 10.
-		ft_putnbr_base(va_arg(args, int), "0123456789");
-	else if (c == 'u')							// %u print an unsigned decimal (base 10) number
-		ft_putnbr_base((long)va_arg(args, unsigned int), "0123456789");
-	else if (c == 'x')							// %x print a number in hexadecimal (base 16).
-		ft_putnbr_base(va_arg(args, long), "0123456789abcdef");
-	else if (c == 'X')							// %x print a number in hexadecimal (base 16).
-		ft_putnbr_base(va_arg(args, long), "0123456789ABCDEF");
-	else if (c == '%')							// %% print a percent sign
-		ft_putchar_fd('%', 1);
+	char	*ret;
+	char	*tmp;
+
+	ret = malloc (2 * sizeof(char));
+	ret[0] = c;
+	ret[1] = '\0';
+	tmp = ft_strjoin(*str, ret);
+	free (ret);
+	free (*str);
+	*str = tmp;
+	return (1);
+}
+
+char	*form_string(va_list args, t_flags flags)
+{
+	char	*ret;
+
+	if (flags.specifier == 'c')
+		ret = c_format_string(args, flags);
+	else if (flags.specifier == 's')
+		ret = s_format_string(args, flags);
+	else if (flags.specifier == 'p')
+		ret = p_format_string(args, flags);
+	else if (flags.specifier == 'd' || flags.specifier == 'i')
+		ret = d_format_string(args, flags);
+	else if (flags.specifier == 'u')
+		ret = d_format_string(args, flags);
+	else if (flags.specifier == 'x' || flags.specifier == 'X')
+		ret = x_format_string(args, flags);
+	else if (flags.specifier == '%')
+		ret = ft_strdup("%");
+	if (!ret)
+		ret = NULL;
+	return (ret);
+}
+
+void	print_flags(t_flags *flags)
+{
+	ft_putstr_fd("params: ", 1);
+	ft_putstr_fd(flags->params, 1);
+	ft_putstr_fd("\njustify: ", 1);
+	ft_putnbr_fd(flags->justify, 1);
+	ft_putstr_fd("\ninvisible_plus: ", 1);
+	ft_putnbr_fd(flags->invisible_plus, 1);
+	ft_putstr_fd("\nplus: ", 1);
+	ft_putnbr_fd(flags->plus, 1);
+	ft_putstr_fd("\nprecision: ", 1);
+	ft_putnbr_fd(flags->precision, 1);
+	ft_putstr_fd("\nwidth: ", 1);
+	ft_putnbr_fd(flags->width, 1);
+	ft_putstr_fd("\nzero_x: ", 1);
+	ft_putnbr_fd(flags->zero_x, 1);
+	ft_putstr_fd("\nzerofill: ", 1);
+	ft_putnbr_fd(flags->zerofill, 1);
+	ft_putstr_fd("\nspecifier: ", 1);
+	ft_putchar_fd(flags->specifier, 1);
+	ft_putstr_fd("\nparams_length: ", 1);
+	ft_putnbr_fd(flags->params_length, 1);
+	ft_putstr_fd("\n", 1);
+}
+
+int	flag_handler(const char **s, va_list args, char **str)
+{
+	char	*ret;
+	char	*tmp;
+	t_flags	flags;
+
+	flags = flag_parse(*s);
+	tmp = form_string(args, flags);
+	ret = ft_strjoin(*str, tmp);
+	free (tmp);
+	free (*str);
+	*str = ret;
+	// if (flags.specifier != '%')
+	// 	print_flags(&flags);
+	free(flags.params);
+	return (flags.params_length);
 }
 
 int	ft_printf(const char *arr, ...)
 {
-	va_list args;
-	int	i;
-	
-	i = 0;
+	va_list	args;
+	int		i;
+	char	*str;
+	int		handler_size;
+
 	va_start(args, arr);
+	str = ft_strdup("");
 	while (*arr)
 	{
 		if (*arr == '%')
 		{
 			arr++;
-			i++;
-			check_flag(*arr, args);
+			handler_size = flag_handler(&arr, args, &str);
+			arr += handler_size;
 		}
 		else
-		{
-			ft_putchar_fd(*arr, 1);
-			i++;
-		}
-		arr++;
+			arr += add_char(&str, *arr);
 	}
+	ft_putstr_fd(str, 1);
+	i = ft_strlen(str);
+	free(str);
+	va_end(args);
 	return (i);
 }
