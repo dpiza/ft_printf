@@ -6,7 +6,7 @@
 /*   By: dpiza <dpiza@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/11 13:52:00 by dpiza             #+#    #+#             */
-/*   Updated: 2021/08/19 20:51:00 by dpiza            ###   ########.fr       */
+/*   Updated: 2021/08/20 16:14:33 by dpiza            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,12 @@
 # define FT_PRINTF_H
 # define TRUE 1
 # define FALSE 0
+
+#ifdef __linux__
+# define NULL_POINTER "(nil)"
+#elif defined __APPLE__
+# define NULL_POINTER "0x0"
+#endif
 
 #include <stdarg.h>
 #include <unistd.h>

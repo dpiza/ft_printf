@@ -6,7 +6,7 @@
 /*   By: dpiza <dpiza@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/11 13:50:14 by dpiza             #+#    #+#             */
-/*   Updated: 2021/08/19 20:50:13 by dpiza            ###   ########.fr       */
+/*   Updated: 2021/08/20 16:34:00 by dpiza            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,18 +75,17 @@ void	print_flags(t_flags *flags)
 	ft_putstr_fd("\n", 1);
 }
 
-int	flag_handler(const char **s, va_list args, char **str)
+int	format_handler(const char **s, va_list args, int *i)
 {
 	char	*ret;
-	char	*tmp;
 	t_flags	flags;
 
 	flags = flag_parse(*s);
-	tmp = form_string(args, flags);
-	ret = ft_strjoin(*str, tmp);
-	free (tmp);
-	free (*str);
-	*str = ret;
+	ret = form_string(args, flags);
+	*i += ft_strlen(ret);
+	if (flags.specifier != 'c')
+		ft_putstr_fd(ret, 1);
+	free (ret);
 	// if (flags.specifier != '%')
 	// 	print_flags(&flags);
 	free(flags.params);
@@ -97,25 +96,30 @@ int	ft_printf(const char *arr, ...)
 {
 	va_list	args;
 	int		i;
-	char	*str;
-	int		handler_size;
+	// char	*str;
+	// int		handler_size;
 
+	i = 0;
 	va_start(args, arr);
-	str = ft_strdup("");
+	// str = ft_strdup("");
 	while (*arr)
 	{
 		if (*arr == '%')
 		{
 			arr++;
-			handler_size = flag_handler(&arr, args, &str);
-			arr += handler_size;
+			arr += format_handler(&arr, args, &i);
 		}
 		else
-			arr += add_char(&str, *arr);
+		{
+			ft_putchar_fd(*arr, 1);
+			i++;
+			arr++;
+			// arr += add_char(&str, *arr);
+		}
 	}
-	ft_putstr_fd(str, 1);
-	i = ft_strlen(str);
-	free(str);
+	// ft_putstr_fd(str, 1);
+	// i += ft_strlen(str);
+	// free(str);
 	va_end(args);
 	return (i);
 }

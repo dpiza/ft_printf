@@ -6,7 +6,7 @@
 /*   By: dpiza <dpiza@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/17 19:49:43 by dpiza             #+#    #+#             */
-/*   Updated: 2021/08/19 19:14:17 by dpiza            ###   ########.fr       */
+/*   Updated: 2021/08/20 17:20:02 by dpiza            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,24 +15,26 @@
 char	*c_format_string(va_list args, t_flags flags)
 {
 	char	*ret;
-	char	*str;
 	int		size;
-	int		just;
+	int		i;
+	char	c;
 
-	str = ft_strdup("");
-	add_char(&str, va_arg(args, int));
-	just = 0;
-	if (ft_strlen(str) >= (unsigned int)flags.width)
-		size = ft_strlen(str);
-	else
+	c = va_arg(args, int);
+	size = 1;
+	i = 0;
+	if (flags.width > 1)
 		size = flags.width;
 	ret = malloc ((size + 1) * sizeof(char));
 	ft_memset(ret, 32, size);
-	if (!flags.justify)
-		just = 1;
-	ft_memcpy(ret + (just * (size - ft_strlen(str))), str, ft_strlen(str));
+	ret[((!flags.justify) * (size - 1))] = c;
 	ret[size] = '\0';
-	free (str);
+	while (i < size)
+	{
+		ft_putchar_fd(ret[i], 1);
+		i++;
+	}
+	if (c == '\0')
+		ret[((!flags.justify) * (size - 1))] = '0';
 	return (ret);
 }
 
@@ -44,6 +46,8 @@ char	*s_format_string(va_list args, t_flags flags)
 	int		just;
 
 	str = ft_strdup(va_arg(args, char *));
+	if (!str)
+		return (ft_strdup("(null)"));
 	just = 0;
 	if (ft_strlen(str) >= (unsigned int)flags.width)
 		size = ft_strlen(str);
@@ -65,9 +69,14 @@ char	*p_format_string(va_list args, t_flags flags)
 	char	*str;
 	char	*tmp;
 	char	*base;
+	unsigned long	arg;
 
 	base = "0123456789abcdef";
-	str = ft_nbr_base((unsigned long long)va_arg(args, char *), base);
+	arg = (unsigned long)va_arg(args, char *);
+	// ft_putnbr_fd(arg, 1);
+	if (!arg)
+		return (ft_strdup(NULL_POINTER));
+	str = ft_nbr_base((unsigned long)arg, base);
 	if (flags.specifier == 'p')
 		tmp = ft_strdup("0x");
 	ret = ft_strjoin(tmp, str);
@@ -82,13 +91,17 @@ char	*x_format_string(va_list args, t_flags flags)
 	char	*str;
 	char	*base_s;
 	char	*base_l;
+	unsigned long long lint;
 
 	base_s = "0123456789abcdef";
 	base_l = "0123456789ABCDEF";
+	lint = va_arg(args, unsigned long long);
+	if (lint == 0)
+		return (ft_strdup("0"));
 	if (flags.specifier == 'x')
-		str = ft_nbr_base((unsigned long long)va_arg(args, char *), base_s);
+		str = ft_nbr_base(lint, base_s);
 	else
-		str = ft_nbr_base((unsigned long long)va_arg(args, char *), base_l);
+		str = ft_nbr_base(lint, base_l);
 	if (flags.zero_x && flags.specifier == 'x')
 		ret = ft_strjoin("0x", str);
 	else if (flags.zero_x)

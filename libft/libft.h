@@ -6,7 +6,7 @@
 /*   By: dpiza <dpiza@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/21 11:48:22 by dpiza             #+#    #+#             */
-/*   Updated: 2021/08/19 19:39:46 by dpiza            ###   ########.fr       */
+/*   Updated: 2021/08/20 16:28:39 by dpiza            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 void	ft_putchar_fd(char c, int fd);
 void	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
-void	ft_putnbr_fd(int n, int fd);
+void	ft_putnbr_fd(long long n, int fd);
 void	ft_putnbr_base(long long nbr, char *base);
 char	*ft_nbr_base(long long nbr, char *base);
 
