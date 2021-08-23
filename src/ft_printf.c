@@ -6,7 +6,7 @@
 /*   By: dpiza <dpiza@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/11 13:50:14 by dpiza             #+#    #+#             */
-/*   Updated: 2021/08/23 13:28:30 by dpiza            ###   ########.fr       */
+/*   Updated: 2021/08/23 14:24:42 by dpiza            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*form_string(va_list args, t_flags flags)
 	else if (flags.specifier == 's')
 		ret = s_format_string(args, flags);
 	else if (flags.specifier == 'p')
-		ret = p_format_string(args);
+		ret = p_format_string(args, flags);
 	else if (flags.specifier == 'd' || flags.specifier == 'i')
 		ret = d_format_string(args, flags);
 	else if (flags.specifier == 'u')
@@ -66,13 +66,15 @@ int	format_handler(const char **s, va_list args, int *i)
 	t_flags	flags;
 
 	flags = flag_parse(*s);
+	// if (flags.specifier != '%')
+	// 	print_flags(&flags);
+	if (flags.specifier == 'E')
+		return (-1);
 	ret = form_string(args, flags);
 	*i += ft_strlen(ret);
 	if (flags.specifier != 'c')
 		ft_putstr_fd(ret, 1);
 	free (ret);
-	// if (flags.specifier != '%')
-	// 	print_flags(&flags);
 	free(flags.params);
 	return (flags.params_length);
 }
@@ -81,30 +83,27 @@ int	ft_printf(const char *arr, ...)
 {
 	va_list	args;
 	int		i;
-	// char	*str;
-	// int		handler_size;
+	int		ret;
 
 	i = 0;
 	va_start(args, arr);
-	// str = ft_strdup("");
 	while (*arr)
 	{
 		if (*arr == '%')
 		{
 			arr++;
-			arr += format_handler(&arr, args, &i);
+			ret = format_handler(&arr, args, &i);
+			if (ret < 0)
+				return (-1);
+			arr += ret;
 		}
 		else
 		{
 			ft_putchar_fd(*arr, 1);
 			i++;
 			arr++;
-			// arr += add_char(&str, *arr);
 		}
 	}
-	// ft_putstr_fd(str, 1);
-	// i += ft_strlen(str);
-	// free(str);
 	va_end(args);
 	return (i);
 }

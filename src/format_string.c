@@ -6,11 +6,27 @@
 /*   By: dpiza <dpiza@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/17 19:49:43 by dpiza             #+#    #+#             */
-/*   Updated: 2021/08/23 13:28:10 by dpiza            ###   ########.fr       */
+/*   Updated: 2021/08/23 14:21:10 by dpiza            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+char	*format_string(char *str, t_flags flags)
+{
+	int	size;
+	char	*ret;
+
+	if (ft_strlen(str) >= (unsigned int)flags.width)
+		size = ft_strlen(str);
+	else
+		size = flags.width;
+	ret = malloc ((size + 1) * sizeof(char));
+	ft_memset(ret, 32, size);
+	ft_memcpy(ret + ((!flags.justify) * (size - ft_strlen(str))), str, ft_strlen(str));
+	ret[size] = '\0';
+	return (ret);
+}
 
 char	*c_format_string(va_list args, t_flags flags)
 {
@@ -42,40 +58,40 @@ char	*s_format_string(va_list args, t_flags flags)
 {
 	char	*ret;
 	char	*str;
-	int		size;
-	int		just;
+	// int		size;
 
 	str = ft_strdup(va_arg(args, char *));
 	if (!str)
-		return (ft_strdup("(null)"));
-	just = 0;
-	if (ft_strlen(str) >= (unsigned int)flags.width)
-		size = ft_strlen(str);
-	else
-		size = flags.width;
-	ret = malloc ((size + 1) * sizeof(char));
-	ft_memset(ret, 32, size);
-	if (!flags.justify)
-		just = 1;
-	ft_memcpy(ret + (just * (size - ft_strlen(str))), str, ft_strlen(str));
-	ret[size] = '\0';
+		str = ft_strdup("(null)");
+	ret = format_string(str, flags);
 	free (str);
 	return (ret);
 }
 
-char	*p_format_string(va_list args)
+char	*p_format_string(va_list args, t_flags flags)
 {
 	char	*ret;
 	char	*str;
-	char	*base;
+	char	*tmp;
 	char	*arg;
+	// int		size;
 
-	base = "0123456789abcdef";
 	arg = va_arg(args, char *);
-	if (!arg)
-		return (ft_strdup(NULL_POINTER));
-	str = ft_ullnbr_base((unsigned long long)arg, base);
-	ret = ft_strjoin("0x", str);
+	tmp = ft_ullnbr_base((unsigned long long)arg, "0123456789abcdef");
+	if (arg)
+		str = ft_strjoin("0x", tmp);
+	else
+		str = ft_strdup(NULL_POINTER);
+	// if (ft_strlen(str) >= (unsigned int)flags.width)
+	// 	size = ft_strlen(str);
+	// else
+	// 	size = flags.width;
+	// ret = malloc ((size + 1) * sizeof(char));
+	// ft_memset(ret, 32, size);
+	// ft_memcpy(ret + ((!flags.justify) * (size - ft_strlen(str))), str, ft_strlen(str));
+	// ret[size] = '\0';
+	ret = format_string(str, flags);
+	free (tmp);
 	free (str);
 	return (ret);
 }
@@ -84,25 +100,24 @@ char	*x_format_string(va_list args, t_flags flags)
 {
 	char	*ret;
 	char	*str;
-	char	*base_s;
-	char	*base_l;
+	char	*tmp;
 	unsigned long lint;
 
-	base_s = "0123456789abcdef";
-	base_l = "0123456789ABCDEF";
 	lint = va_arg(args, unsigned long);
 	if (lint == 0)
 		return (ft_strdup("0"));
 	if (flags.specifier == 'x')
-		str = ft_nbr_base(lint, base_s);
+		str = ft_nbr_base(lint, "0123456789abcdef");
 	else
-		str = ft_nbr_base(lint, base_l);
+		str = ft_nbr_base(lint, "0123456789ABCDEF");
 	if (flags.zero_x && flags.specifier == 'x')
-		ret = ft_strjoin("0x", str);
+		tmp = ft_strjoin("0x", str);
 	else if (flags.zero_x)
-		ret = ft_strjoin("0X", str);
+		tmp = ft_strjoin("0X", str);
 	else
-		ret = ft_strdup(str);
+		tmp = ft_strdup(str);
+	ret = format_string(str, flags);
+	free (tmp);
 	free (str);
 	return (ret);
 }

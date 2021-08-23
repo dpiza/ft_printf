@@ -6,11 +6,22 @@
 /*   By: dpiza <dpiza@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/17 16:21:56 by dpiza             #+#    #+#             */
-/*   Updated: 2021/08/19 19:59:20 by dpiza            ###   ########.fr       */
+/*   Updated: 2021/08/23 14:24:23 by dpiza            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+int	is_specification(char c)
+{
+	char *specs;
+
+	specs = "cspdiuxX%";
+	if (ft_strrchr(specs, c))
+		return (1);
+	else
+		return (-1);
+}
 
 int	is_flag(char c, t_flags *flags)
 {
@@ -81,7 +92,10 @@ t_flags	flag_parse(const char *s)
 		}
 		i++;
 	}
-	flags.specifier = s[i];
+	if (is_specification(s[i]) > 0)
+		flags.specifier = s[i];
+	else
+		flags.specifier = 'E';
 	add_char(&flags.params, s[i]);
 	flags.params_length = i + 1;
 	return (flags);
