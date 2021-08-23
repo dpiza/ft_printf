@@ -6,26 +6,11 @@
 /*   By: dpiza <dpiza@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/11 13:50:14 by dpiza             #+#    #+#             */
-/*   Updated: 2021/08/20 16:34:00 by dpiza            ###   ########.fr       */
+/*   Updated: 2021/08/23 13:09:59 by dpiza            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-int	add_char(char **str, char c)
-{
-	char	*ret;
-	char	*tmp;
-
-	ret = malloc (2 * sizeof(char));
-	ret[0] = c;
-	ret[1] = '\0';
-	tmp = ft_strjoin(*str, ret);
-	free (ret);
-	free (*str);
-	*str = tmp;
-	return (1);
-}
 
 char	*form_string(va_list args, t_flags flags)
 {

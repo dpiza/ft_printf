@@ -6,7 +6,7 @@
 /*   By: dpiza <dpiza@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/17 19:49:43 by dpiza             #+#    #+#             */
-/*   Updated: 2021/08/20 17:20:02 by dpiza            ###   ########.fr       */
+/*   Updated: 2021/08/23 13:05:31 by dpiza            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,14 +69,14 @@ char	*p_format_string(va_list args, t_flags flags)
 	char	*str;
 	char	*tmp;
 	char	*base;
-	unsigned long	arg;
+	char	*arg;
 
 	base = "0123456789abcdef";
-	arg = (unsigned long)va_arg(args, char *);
-	// ft_putnbr_fd(arg, 1);
+	arg = va_arg(args, char *);
+	// ft_putnbr_fd((unsigned long long)arg, 1);
 	if (!arg)
 		return (ft_strdup(NULL_POINTER));
-	str = ft_nbr_base((unsigned long)arg, base);
+	str = ft_ullnbr_base((unsigned long long)arg, base);
 	if (flags.specifier == 'p')
 		tmp = ft_strdup("0x");
 	ret = ft_strjoin(tmp, str);
@@ -91,11 +91,12 @@ char	*x_format_string(va_list args, t_flags flags)
 	char	*str;
 	char	*base_s;
 	char	*base_l;
-	unsigned long long lint;
+	unsigned long lint;
 
 	base_s = "0123456789abcdef";
 	base_l = "0123456789ABCDEF";
-	lint = va_arg(args, unsigned long long);
+	lint = va_arg(args, unsigned long);
+	// ft_putnbr_fd(lint, 1);
 	if (lint == 0)
 		return (ft_strdup("0"));
 	if (flags.specifier == 'x')

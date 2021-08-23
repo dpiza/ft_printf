@@ -1,33 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_nbr_base.c                                      :+:      :+:    :+:   */
+/*   ft_ullnbr_base.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dpiza <dpiza@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 00:19:29 by dpiza             #+#    #+#             */
-/*   Updated: 2021/08/23 13:11:13 by dpiza            ###   ########.fr       */
+/*   Updated: 2021/08/23 13:11:21 by dpiza            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	add_char(char **str, char c)
-{
-	char *ret;
-	char *tmp;
-	
-	ret = malloc (2 * sizeof(char));
-	ret[0] = c;
-	ret[1] = '\0';
-	tmp = ft_strjoin(*str, ret);
-	free (ret);
-	free (*str);
-	*str = tmp;
-	return (1);
-}
-
-char	*ft_add_base(long long nbr, char *basec, long long basen)
+char	*ft_ulladd_base(unsigned long long nbr, char *basec, long long basen)
 {
 	char 	b;
 	char	*invert;
@@ -60,26 +45,7 @@ char	*ft_add_base(long long nbr, char *basec, long long basen)
 	return (ret);
 }
 
-int		ft_base_is_valid(char *base)
-{
-	char 	c;
-
-	c = *base;
-	base++;
-	while (*base != '\0')
-	{
-		if (*base != c)
-		{
-			c = *base;
-			base++;
-		}
-		else
-			return (0);
-	}
-	return (1);
-}
-
-char	*ft_nbr_base(long long nbr, char *base)
+char	*ft_ullnbr_base(unsigned long long nbr, char *base)
 {
 	char 	*ret;
 	char	*basec;
@@ -98,6 +64,6 @@ char	*ft_nbr_base(long long nbr, char *base)
 		return (NULL);
 	if (!ft_base_is_valid(base))
 		return (NULL);
-	ret = ft_add_base((unsigned long long)nbr, base, i);
+	ret = ft_ulladd_base((unsigned long long)nbr, base, i);
 	return (ret);
 }
