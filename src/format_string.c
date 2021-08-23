@@ -6,7 +6,7 @@
 /*   By: dpiza <dpiza@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/17 19:49:43 by dpiza             #+#    #+#             */
-/*   Updated: 2021/08/23 13:05:31 by dpiza            ###   ########.fr       */
+/*   Updated: 2021/08/23 13:28:10 by dpiza            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,24 +63,19 @@ char	*s_format_string(va_list args, t_flags flags)
 	return (ret);
 }
 
-char	*p_format_string(va_list args, t_flags flags)
+char	*p_format_string(va_list args)
 {
 	char	*ret;
 	char	*str;
-	char	*tmp;
 	char	*base;
 	char	*arg;
 
 	base = "0123456789abcdef";
 	arg = va_arg(args, char *);
-	// ft_putnbr_fd((unsigned long long)arg, 1);
 	if (!arg)
 		return (ft_strdup(NULL_POINTER));
 	str = ft_ullnbr_base((unsigned long long)arg, base);
-	if (flags.specifier == 'p')
-		tmp = ft_strdup("0x");
-	ret = ft_strjoin(tmp, str);
-	free (tmp);
+	ret = ft_strjoin("0x", str);
 	free (str);
 	return (ret);
 }
@@ -96,7 +91,6 @@ char	*x_format_string(va_list args, t_flags flags)
 	base_s = "0123456789abcdef";
 	base_l = "0123456789ABCDEF";
 	lint = va_arg(args, unsigned long);
-	// ft_putnbr_fd(lint, 1);
 	if (lint == 0)
 		return (ft_strdup("0"));
 	if (flags.specifier == 'x')

@@ -6,7 +6,7 @@
 /*   By: dpiza <dpiza@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/11 13:50:14 by dpiza             #+#    #+#             */
-/*   Updated: 2021/08/23 13:18:29 by dpiza            ###   ########.fr       */
+/*   Updated: 2021/08/23 13:28:30 by dpiza            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*form_string(va_list args, t_flags flags)
 	else if (flags.specifier == 's')
 		ret = s_format_string(args, flags);
 	else if (flags.specifier == 'p')
-		ret = p_format_string(args, flags);
+		ret = p_format_string(args);
 	else if (flags.specifier == 'd' || flags.specifier == 'i')
 		ret = d_format_string(args, flags);
 	else if (flags.specifier == 'u')
