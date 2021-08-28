@@ -6,7 +6,7 @@
 /*   By: dpiza <dpiza@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/17 19:49:43 by dpiza             #+#    #+#             */
-/*   Updated: 2021/08/23 14:21:10 by dpiza            ###   ########.fr       */
+/*   Updated: 2021/08/26 14:14:44 by dpiza            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ char	*s_format_string(va_list args, t_flags flags)
 	if (!str)
 		str = ft_strdup("(null)");
 	ret = format_string(str, flags);
+	if (flags.precision && flags.precision_n < (int)ft_strlen(ret))
+		ret[flags.precision_n]	= '\0';
 	free (str);
 	return (ret);
 }

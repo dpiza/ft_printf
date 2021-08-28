@@ -39,7 +39,11 @@ ${OBJS_DIR}/%.o: $(SRCS_DIR)/%.c $(HEADERS)
 	$(CC) -I./libft -I./src -c $< -o $@
 
 test: $(NAME) $(HEADERS)
-	$(CC) $(LEAKCHECK) main.c -L. -I $(SRCS_DIR) -lftprintf
+	gcc $(LEAKCHECK) main.c -L. -I $(SRCS_DIR) -lftprintf
+	./a.out
+
+testnbr: $(NAME) $(HEADERS)
+	gcc $(LEAKCHECK) mainnbr.c -L. -I $(SRCS_DIR) -lftprintf
 	./a.out
 
 clean:

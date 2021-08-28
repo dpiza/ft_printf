@@ -6,7 +6,7 @@
 /*   By: dpiza <dpiza@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/11 13:21:03 by dpiza             #+#    #+#             */
-/*   Updated: 2021/08/23 14:27:14 by dpiza            ###   ########.fr       */
+/*   Updated: 2021/08/28 18:01:26 by dpiza            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,27 @@
 int	main(void)
 {
 	// char vCharNull = '\0';
-	// char vChar01 = '\0';
+	// char vChar01 = 'c';
 	// char *vChar02 = "String com 19 char.";
 	// char *null_str = NULL;
 	// char *vChar02 = "Denny";
 	// char *vChar03 = "Outra String";
 	// char vChar04 = '0';
-	int vInt01 = 87263;
-	// int vInt02 = -87263;
+	// int vInt01 = 87263;
+	// int vInt01 = 0;
+	// int vInt02 = -87;
 	int retorno;
 	// double vDoub01 = 872.63;
+
+	retorno = printf("%--4.1s %s %------------------9.3s of %s of %-5.7s", "for", "the", "goooood", "aaall", "us");
+	printf("Retorno: %d\n", retorno);
+	retorno = ft_printf("%--4.1s %s %------------------9.3s of %s of %-5.7s", "for", "the", "goooood", "aaall", "us");
+	printf("Retorno: %d\n\n", retorno);
+
+	retorno = printf("-4.1s: %-4.1s ", "for");
+	printf("Retorno: %d\n", retorno);
+	retorno = ft_printf("-4.1s: %-4.1s ", "for");
+	printf("Retorno: %d\n\n", retorno);
 	
 	// retorno = printf("OG: %%____d: [%    d] ", vInt01);
 	// printf("Retorno: %d\n", retorno);
@@ -43,14 +54,14 @@ int	main(void)
 	// retorno = ft_printf("String: %s Char: %c fim ", "123123", '\0');
 	// printf("Retorno: %d\n\n", retorno);
 
-	// retorno = printf("OG: vChar01c: %-5c ", vChar01);
+	// retorno = printf("OG: vChar01c: %c ", vChar01);
 	// printf("Retorno: %d\n", retorno);
-	// retorno = ft_printf("FT: vChar01c: %-5c ", vChar01);
+	// retorno = ft_printf("FT: vChar01c: %c ", vChar01);
 	// printf("Retorno: %d\n\n", retorno);
 	
-	// retorno = printf("OG: vChar02s: %-30s ", vChar02);
+	// retorno = printf("OG: vChar02s: %.10s ", vChar02);
 	// printf("Retorno: %d\n", retorno);
-	// retorno = ft_printf("FT: vChar02s: %-30s ", vChar02);
+	// retorno = ft_printf("FT: vChar02s: %.10s ", vChar02);
 	// printf("Retorno: %d\n\n", retorno);
 	
 	// retorno = printf("OG: vChar02p: %p ", vChar02);
@@ -73,10 +84,10 @@ int	main(void)
 	// retorno = ft_printf("FT: vInt01d: %+-50d ", vInt01);
 	// printf("Retorno: %d\n\n", retorno);
 
-	retorno = printf("OG: vInt01d: %.8d ", vInt01);
-	printf("Retorno: %d\n", retorno);
-	retorno = ft_printf("FT: vInt01d: %.8d ", vInt01);
-	printf("Retorno: %d\n\n", retorno);
+	// retorno = printf("OG: vInt01d: %-3.2d ", vInt01);
+	// printf("Retorno: %d\n", retorno);
+	// retorno = ft_printf("FT: vInt01d: %-3.2d ", vInt01);
+	// printf("Retorno: %d\n\n", retorno);
 	
 	// retorno = printf("OG: vInt01i: %i ", vInt01);
 	// printf("Retorno: %d\n", retorno);
@@ -88,9 +99,9 @@ int	main(void)
 	// retorno = ft_printf("FT: vInt01u: %u ", vInt01);
 	// printf("Retorno: %d\n\n", retorno);
 	
-	// retorno = printf("OG: vInt02d: %-9d ", vInt02);
+	// retorno = printf("OG: vInt02d: %-3.2d ", vInt02);
 	// printf("Retorno: %d\n", retorno);
-	// retorno = ft_printf("FT: vInt02d: %-9d ", vInt02);
+	// retorno = ft_printf("FT: vInt02d: %-3.2d ", vInt02);
 	// printf("Retorno: %d\n\n", retorno);
 	
 	// retorno = printf("OG: vInt02i: %i ", vInt02);

@@ -6,7 +6,7 @@
 /*   By: dpiza <dpiza@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/11 13:52:00 by dpiza             #+#    #+#             */
-/*   Updated: 2021/08/23 14:08:23 by dpiza            ###   ########.fr       */
+/*   Updated: 2021/08/26 12:45:56 by dpiza            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct
 	int		zerofill;
 	int		width;
 	int		precision;
+	int		precision_n;
 	int		zero_x;
 	int		specifier;
 	int		params_length;

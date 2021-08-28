@@ -6,7 +6,7 @@
 /*   By: dpiza <dpiza@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/11 13:50:14 by dpiza             #+#    #+#             */
-/*   Updated: 2021/08/23 14:24:42 by dpiza            ###   ########.fr       */
+/*   Updated: 2021/08/28 16:05:46 by dpiza            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char	*form_string(va_list args, t_flags flags)
 
 void	print_flags(t_flags *flags)
 {
-	ft_putstr_fd("params: ", 1);
+	ft_putstr_fd("\nparams: ", 1);
 	ft_putstr_fd(flags->params, 1);
 	ft_putstr_fd("\njustify: ", 1);
 	ft_putnbr_fd(flags->justify, 1);
@@ -47,6 +47,8 @@ void	print_flags(t_flags *flags)
 	ft_putnbr_fd(flags->plus, 1);
 	ft_putstr_fd("\nprecision: ", 1);
 	ft_putnbr_fd(flags->precision, 1);
+	ft_putstr_fd("\nprecision_n: ", 1);
+	ft_putnbr_fd(flags->precision_n, 1);
 	ft_putstr_fd("\nwidth: ", 1);
 	ft_putnbr_fd(flags->width, 1);
 	ft_putstr_fd("\nzero_x: ", 1);
@@ -66,14 +68,16 @@ int	format_handler(const char **s, va_list args, int *i)
 	t_flags	flags;
 
 	flags = flag_parse(*s);
-	// if (flags.specifier != '%')
-	// 	print_flags(&flags);
 	if (flags.specifier == 'E')
 		return (-1);
 	ret = form_string(args, flags);
+	if (!ret)
+		return (flags.params_length);
 	*i += ft_strlen(ret);
 	if (flags.specifier != 'c')
 		ft_putstr_fd(ret, 1);
+	// if (flags.specifier != '%')
+	// 	print_flags(&flags);
 	free (ret);
 	free(flags.params);
 	return (flags.params_length);
