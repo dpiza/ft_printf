@@ -6,7 +6,7 @@
 /*   By: dpiza <dpiza@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/11 13:50:14 by dpiza             #+#    #+#             */
-/*   Updated: 2021/08/28 16:05:46 by dpiza            ###   ########.fr       */
+/*   Updated: 2021/09/01 19:43:48 by dpiza            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,10 +76,9 @@ int	format_handler(const char **s, va_list args, int *i)
 	*i += ft_strlen(ret);
 	if (flags.specifier != 'c')
 		ft_putstr_fd(ret, 1);
-	// if (flags.specifier != '%')
-	// 	print_flags(&flags);
+	// print_flags(&flags);
 	free (ret);
-	free(flags.params);
+	free (flags.params);
 	return (flags.params_length);
 }
 

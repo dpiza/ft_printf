@@ -9,7 +9,7 @@ RM = rm -f
 
 NAME = libftprintf.a
 
-SRCS_FILES = ft_printf.c flag_parse.c format_string.c format_nbr_string.c
+SRCS_FILES = ft_printf.c flag_parse.c format_string.c format_nbr_string.c format_hex_string.c
 SRCS = $(addprefix $(SRCS_DIR)/, $(SRCS_FILES))
 
 HEADERS_FILES = ft_printf.h
@@ -44,6 +44,10 @@ test: $(NAME) $(HEADERS)
 
 testnbr: $(NAME) $(HEADERS)
 	gcc $(LEAKCHECK) mainnbr.c -L. -I $(SRCS_DIR) -lftprintf
+	./a.out
+
+testhex: $(NAME) $(HEADERS)
+	gcc $(LEAKCHECK) mainhex.c -L. -I $(SRCS_DIR) -lftprintf
 	./a.out
 
 clean:

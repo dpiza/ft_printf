@@ -6,7 +6,7 @@
 /*   By: dpiza <dpiza@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/11 13:52:00 by dpiza             #+#    #+#             */
-/*   Updated: 2021/08/26 12:45:56 by dpiza            ###   ########.fr       */
+/*   Updated: 2021/09/01 19:24:33 by dpiza            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,14 @@
 // #ifdef __linux__
 // # define NULL_POINTER "(nil)"
 // #elif defined __APPLE__
-# define NULL_POINTER "0x0"
+// # define NULL_POINTER "0x0"
 // #endif
 
-#include <stdarg.h>
-#include <unistd.h>
-#include "../libft/libft.h"
+# include <stdarg.h>
+# include <unistd.h>
+# include "../libft/libft.h"
 
-typedef struct
+typedef struct flags
 {
 	int		justify;
 	int		plus;
@@ -39,7 +39,7 @@ typedef struct
 	int		params_length;
 	char	*params;
 }			t_flags;
-int		ft_printf(const char *, ...);
+// int		ft_printf(const char *, ...);
 t_flags	flag_parse(const char *s);
 char	*c_format_string(va_list args, t_flags flags);
 char	*s_format_string(va_list args, t_flags flags);

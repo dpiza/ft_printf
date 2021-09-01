@@ -6,7 +6,7 @@
 /*   By: dpiza <dpiza@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/17 16:21:56 by dpiza             #+#    #+#             */
-/*   Updated: 2021/08/28 17:51:59 by dpiza            ###   ########.fr       */
+/*   Updated: 2021/09/01 19:50:17 by dpiza            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	is_specification(char c)
 {
-	char *specs;
+	char	*specs;
 
 	specs = "cspdiuxX%";
 	if (ft_strrchr(specs, c))
@@ -49,7 +49,7 @@ int	is_precision(char c, t_flags *flags)
 	}
 	else if (ft_isdigit(c) && flags->precision == TRUE)
 	{
-		if (flags->precision_n == 0)	
+		if (flags->precision_n == 0)
 			flags->precision_n = c - 48;
 		else
 			flags->precision_n = (flags->precision_n * 10) + (c - 48);
@@ -84,21 +84,13 @@ void	init_struct(t_flags *flags)
 t_flags	flag_parse(const char *s)
 {
 	int		i;
-	// int		space;
 	t_flags	flags;
 
 	i = 0;
-	// space = 0;
 	init_struct(&flags);
 	while (is_flag(s[i], &flags) || is_precision(s[i], &flags))
 	{
 		add_char(&flags.params, s[i]);
-		// if (s[i] == ' ')
-		// {
-		// 	if (space > 0)
-		// 		break ;
-		// 	space = 1;
-		// }
 		i++;
 	}
 	if (is_specification(s[i]) > 0)

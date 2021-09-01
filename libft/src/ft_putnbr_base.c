@@ -6,7 +6,7 @@
 /*   By: dpiza <dpiza@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 00:19:29 by dpiza             #+#    #+#             */
-/*   Updated: 2021/08/12 19:53:56 by dpiza            ###   ########.fr       */
+/*   Updated: 2021/09/01 17:45:21 by dpiza            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_print_base(long long nbr, char *basec, long long basen, int i)
 {
-	char b;
+	char	b;
 
 	if (nbr == -2147483648)
 	{
@@ -34,9 +34,9 @@ void	ft_print_base(long long nbr, char *basec, long long basen, int i)
 	write(1, &b, 1);
 }
 
-int		ft_is_valid(char *base)
+int	ft_is_valid(char	*base)
 {
-	char c;
+	char	c;
 
 	c = *base;
 	base++;

@@ -6,7 +6,7 @@
 /*   By: dpiza <dpiza@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/21 11:48:22 by dpiza             #+#    #+#             */
-/*   Updated: 2021/08/23 13:11:26 by dpiza            ###   ########.fr       */
+/*   Updated: 2021/09/01 19:19:51 by dpiza            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,12 @@ void	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(long long n, int fd);
 void	ft_putnbr_base(long long nbr, char *base);
+int		add_char(char **str, char c);
+void	invert_str(char *src, char **dest);
 char	*ft_nbr_base(long long nbr, char *base);
 char	*ft_ullnbr_base(unsigned long long nbr, char *base);
-int		add_char(char **str, char c);
 char	*ft_add_base(long long nbr, char *basec, long long basen);
 char	*ft_ulladd_base(unsigned long long nbr, char *basec, long long basen);
-int		ft_base_is_valid(char *base);
 
 
 #endif
