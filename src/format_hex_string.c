@@ -6,7 +6,7 @@
 /*   By: dpiza <dpiza@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/01 15:17:22 by dpiza             #+#    #+#             */
-/*   Updated: 2021/09/01 19:00:44 by dpiza            ###   ########.fr       */
+/*   Updated: 2021/09/01 20:47:53 by dpiza            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*format_hex_width(char *str, t_flags flags)
 		size = str_len;
 	else
 		size = flags.width;
-	ret = malloc ((size + 1) * sizeof(char));
+	ret = ft_calloc((size + 1), sizeof(char));
 	ft_memset(ret, flags.zerofill, size);
 	ft_memcpy(ret + ((!flags.justify) * (size - str_len)), str, str_len);
 	ret[size] = '\0';
@@ -44,7 +44,7 @@ char	*format_hex_precision(char *str, t_flags flags)
 		size = flags.precision_n;
 	ret = ft_calloc((size + 1), sizeof(char));
 	ft_memset(ret, 48, size);
-	ft_memcpy(ret + (size - str_len), str, size);
+	ft_memcpy(ret + (size - str_len), str, str_len);
 	return (ret);
 }
 
