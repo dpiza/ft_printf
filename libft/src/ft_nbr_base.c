@@ -6,7 +6,7 @@
 /*   By: dpiza <dpiza@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 00:19:29 by dpiza             #+#    #+#             */
-/*   Updated: 2021/09/01 19:16:49 by dpiza            ###   ########.fr       */
+/*   Updated: 2021/09/03 18:24:49 by dpiza            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,13 +87,13 @@ char	*ft_ulladd_base(unsigned long long nbr, char *basec, long long basen)
 	char	*ret;
 
 	invert = ft_strdup("");
-	if (nbr < basen)
+	if (nbr < (unsigned long long)basen)
 		add_char(&invert, basec[nbr % basen]);
-	while (nbr >= basen)
+	while (nbr >= (unsigned long long)basen)
 	{
 		b = basec[nbr % basen];
 		add_char(&invert, b);
-		if (nbr / basen < basen)
+		if (nbr / basen < (unsigned long long)basen)
 		{
 			b = basec[nbr / basen];
 			add_char(&invert, b);

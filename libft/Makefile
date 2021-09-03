@@ -1,11 +1,13 @@
-CC = gcc
-CFLAGS = -Wall -Wextra -Werror
-RM = rm -f
-NAME = libft.a
-DEPS = libft.h
-
 SRCS_DIR = ./src
+HEADERS_DIR = ./src
 OBJS_DIR = ./obj
+
+CFLAGS = -Wall -Wextra -Werror
+LEAKCHECK = -g -fsanitize=address
+CC = gcc $(CFLAGS)
+RM = rm -f
+
+NAME = libft.a
 
 SRCS_FILES = ft_strncmp.c ft_memcpy.c ft_memchr.c ft_atoi.c ft_isascii.c ft_strnstr.c ft_tolower.c ft_memccpy.c \
 			ft_calloc.c ft_toupper.c ft_strdup.c ft_isalpha.c ft_bzero.c ft_strchr.c ft_strrchr.c ft_isalnum.c \
@@ -14,6 +16,9 @@ SRCS_FILES = ft_strncmp.c ft_memcpy.c ft_memchr.c ft_atoi.c ft_isascii.c ft_strn
 			ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c ft_putnbr_base.c ft_nbr_base.c add_char.c
 
 SRCS = $(addprefix $(SRCS_DIR)/, $(SRCS_FILES))
+
+HEADERS_FILES = libft.h
+HEADERS = $(addprefix $(HEADERS_DIR)/, $(HEADERS_FILES))
 
 OBJS_FILES = $(SRCS_FILES:.c=.o)
 OBJS = $(addprefix $(OBJS_DIR)/, $(OBJS_FILES))
@@ -26,7 +31,7 @@ $(NAME): $(OBJS_DIR) $(OBJS)
 $(OBJS_DIR):
 	mkdir -p $(OBJS_DIR)
 
-$(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c $(DEPS)
+$(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c $(HEADERS)
 	$(CC) $(FLAGS) -I ./ -c $< -o $@
 
 clean:
