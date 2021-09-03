@@ -6,7 +6,7 @@
 /*   By: dpiza <dpiza@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/11 13:21:03 by dpiza             #+#    #+#             */
-/*   Updated: 2021/09/03 12:48:21 by dpiza            ###   ########.fr       */
+/*   Updated: 2021/09/03 13:11:37 by dpiza            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,11 @@ int	main(void)
 	// int vInt02 = 0;
 	// int vInt03 = -87;
 	int retorno;
+
+	retorno = printf("OG: LONG_MIN x: %x ",  -4294967296);
+	printf("Retorno: %d\n", retorno);
+	retorno = ft_printf("FT: LONG_MIN x: %x ", -4294967296);
+	printf("Retorno: %d\n\n", retorno);
 
 	retorno = printf("OG: LONG_MAX x: %x ", LONG_MAX);
 	printf("Retorno: %d\n", retorno);

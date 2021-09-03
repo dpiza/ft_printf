@@ -6,7 +6,7 @@
 /*   By: dpiza <dpiza@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/11 13:21:03 by dpiza             #+#    #+#             */
-/*   Updated: 2021/09/01 16:41:15 by dpiza            ###   ########.fr       */
+/*   Updated: 2021/09/03 19:41:21 by dpiza            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,14 @@
 
 int	main(void)
 {
-	int vInt01 = -87;
+	int vInt01 = 87;
 	// int vInt02 = 0;
 	// int vInt03 = -87;
 	int retorno;
 
-	retorno = printf("OG: vInt01 010i: %.5i ", vInt01);
+	retorno = printf("OG: vInt01 010i: %-05i ", vInt01);
 	printf("Retorno: %d\n", retorno);
-	retorno = ft_printf("FT: vInt01 010i: %.5i ", vInt01);
+	retorno = ft_printf("FT: vInt01 010i: %-05i ", vInt01);
 	printf("Retorno: %d\n\n", retorno);
 	
 	// retorno = printf("OG: vInt01 .d: %.d ", vInt01);

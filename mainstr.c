@@ -6,7 +6,7 @@
 /*   By: dpiza <dpiza@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/11 13:21:03 by dpiza             #+#    #+#             */
-/*   Updated: 2021/08/28 18:01:26 by dpiza            ###   ########.fr       */
+/*   Updated: 2021/09/03 16:00:24 by dpiza            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ int	main(void)
 	retorno = ft_printf("%--4.1s %s %------------------9.3s of %s of %-5.7s", "for", "the", "goooood", "aaall", "us");
 	printf("Retorno: %d\n\n", retorno);
 
-	retorno = printf("-4.1s: %-4.1s ", "for");
+	retorno = printf("-4.1s: %-4.10s ", "for");
 	printf("Retorno: %d\n", retorno);
-	retorno = ft_printf("-4.1s: %-4.1s ", "for");
+	retorno = ft_printf("-4.1s: %-4.10s ", "for");
 	printf("Retorno: %d\n\n", retorno);
 	
 	// retorno = printf("OG: %%____d: [%    d] ", vInt01);
