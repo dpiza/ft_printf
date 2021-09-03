@@ -6,7 +6,7 @@
 /*   By: dpiza <dpiza@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/01 15:17:22 by dpiza             #+#    #+#             */
-/*   Updated: 2021/09/01 20:47:53 by dpiza            ###   ########.fr       */
+/*   Updated: 2021/09/03 16:58:57 by dpiza            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 char	*format_hex_width(char *str, t_flags flags)
 {
 	int		size;
-	char	*ret;
 	int		str_len;
+	char	*ret;
 
 	str_len = ft_strlen(str);
 	if (str_len >= flags.width)
@@ -54,9 +54,9 @@ char	*x_format_string(va_list args, t_flags flags)
 	char			*prec;
 	char			*tmp;
 	char			*ret;
-	unsigned long	lint;
+	unsigned int	lint;
 
-	lint = va_arg(args, unsigned long);
+	lint = va_arg(args, unsigned int);
 	if (lint == 0 && flags.precision && !flags.precision_n)
 		str = ft_strdup("");
 	else if (flags.specifier == 'x')

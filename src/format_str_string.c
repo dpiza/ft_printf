@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   format_string.c                                    :+:      :+:    :+:   */
+/*   format_str_string.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dpiza <dpiza@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/17 19:49:43 by dpiza             #+#    #+#             */
-/*   Updated: 2021/09/01 18:25:02 by dpiza            ###   ########.fr       */
+/*   Updated: 2021/09/03 16:58:31 by dpiza            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 char	*format_str_width(char *str, t_flags flags)
 {
 	int		size;
-	char	*ret;
 	int		str_len;
+	char	*ret;
 
 	str_len = ft_strlen(str);
 	if ((int)str_len >= flags.width)
@@ -65,10 +65,10 @@ char	*s_format_string(va_list args, t_flags flags)
 
 char	*c_format_string(va_list args, t_flags flags)
 {
-	char	*ret;
 	int		size;
 	int		i;
 	char	c;
+	char	*ret;
 
 	c = va_arg(args, int);
 	size = 1;

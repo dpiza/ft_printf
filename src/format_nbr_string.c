@@ -6,24 +6,24 @@
 /*   By: dpiza <dpiza@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/19 17:03:12 by dpiza             #+#    #+#             */
-/*   Updated: 2021/09/01 18:20:34 by dpiza            ###   ########.fr       */
+/*   Updated: 2021/09/03 16:59:53 by dpiza            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	fill_sign(t_flags flags, char **nbr)
+void	fill_sign(t_flags flags, char **str)
 {
 	char	*ret;
 
-	if (flags.invisible_plus && *nbr[0] != '-')
-		ret = ft_strjoin(" ", *nbr);
-	else if (flags.plus && *nbr[0] != '-')
-		ret = ft_strjoin("+", *nbr);
+	if (flags.invisible_plus && *str[0] != '-')
+		ret = ft_strjoin(" ", *str);
+	else if (flags.plus && *str[0] != '-')
+		ret = ft_strjoin("+", *str);
 	else
-		ret = ft_strdup(*nbr);
-	free (*nbr);
-	*nbr = ret;
+		ret = ft_strdup(*str);
+	free (*str);
+	*str = ret;
 }
 
 char	*format_nbr_width(char *str, t_flags flags)
