@@ -6,12 +6,13 @@
 /*   By: dpiza <dpiza@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/11 13:21:03 by dpiza             #+#    #+#             */
-/*   Updated: 2021/09/01 20:27:12 by dpiza            ###   ########.fr       */
+/*   Updated: 2021/09/03 12:48:21 by dpiza            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include <stdio.h>
+#include <limits.h>
 
 int	main(void)
 {
@@ -21,30 +22,30 @@ int	main(void)
 	// int vInt03 = -87;
 	int retorno;
 
-	retorno = printf("OG: vInt01 010.20x: %010.20x ", 42);
+	retorno = printf("OG: LONG_MAX x: %x ", LONG_MAX);
 	printf("Retorno: %d\n", retorno);
-	retorno = ft_printf("FT: vInt01 010.20x: %010.20x ", 42);
+	retorno = ft_printf("FT: LONG_MAX x: %x ", LONG_MAX);
 	printf("Retorno: %d\n\n", retorno);
 	
-	retorno = printf("OG: vInt01 042.20x: %042.20x ", 42000);
+	retorno = printf("OG: ULONG_MAX x: %x ", ULONG_MAX);
 	printf("Retorno: %d\n", retorno);
-	retorno = ft_printf("FT: vInt01 042.20x: %042.20x ", 42000);
+	retorno = ft_printf("FT: ULONG_MAX x: %x ", ULONG_MAX);
 	printf("Retorno: %d\n\n", retorno);
 
-	retorno = printf("OG: vInt01 042.52x: %042.52x ", 42000);
+	retorno = printf("OG: 9223372036854775807LL x: %x ", 9223372036854775807LL);
 	printf("Retorno: %d\n", retorno);
-	retorno = ft_printf("FT: vInt01 042.52x: %042.52x ", 42000);
+	retorno = ft_printf("FT: 9223372036854775807LL x: %x ", 9223372036854775807LL);
 	printf("Retorno: %d\n\n", retorno);
 
-	retorno = printf("OG: vInt01 050.50x: %050.50x ", 42);
+	retorno = printf("OG:  %x %x %x %x %x %x %x ", INT_MAX, INT_MIN, LONG_MAX, LONG_MIN, ULONG_MAX, 0, -42);
 	printf("Retorno: %d\n", retorno);
-	retorno = ft_printf("FT: vInt01 050.50x: %050.50x ", 42);
+	retorno = ft_printf("FT:  %x %x %x %x %x %x %x ", INT_MAX, INT_MIN, LONG_MAX, LONG_MIN, ULONG_MAX, 0, -42);
 	printf("Retorno: %d\n\n", retorno);
 
-	// retorno = printf("OG: vInt01 .x: %.x ", 0);
-	// printf("Retorno: %d\n", retorno);
-	// retorno = ft_printf("FT: vInt01 .x: %.x ", 0);
-	// printf("Retorno: %d\n\n", retorno);
+	retorno = printf("OG: %%%c%%%s%%%d%%%i%%%u%%%x%%%X%%%% %%%c%%%s%%%d%%%i%%%u%%%x%%%X%%%% %%%c%%%s%%%d%%%i%%%u%%%x%%%X%%%% %c%% ", 'A', "42", 42, 42 ,42 , 42, 42, 'B', "-42", -42, -42 ,-42 ,-42, 42, 'C', "0", 0, 0 ,0 ,0, 42, 0);
+	printf("Retorno: %d\n", retorno);
+	retorno = ft_printf("FT: %%%c%%%s%%%d%%%i%%%u%%%x%%%X%%%% %%%c%%%s%%%d%%%i%%%u%%%x%%%X%%%% %%%c%%%s%%%d%%%i%%%u%%%x%%%X%%%% %c%% ", 'A', "42", 42, 42 ,42 , 42, 42, 'B', "-42", -42, -42 ,-42 ,-42, 42, 'C', "0", 0, 0 ,0 ,0, 42, 0);
+	printf("Retorno: %d\n\n", retorno);
 	
 	// retorno = printf("OG: vInt01 10.x: %10.x ", 0);
 	// printf("Retorno: %d\n", retorno);
