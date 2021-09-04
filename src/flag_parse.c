@@ -6,7 +6,7 @@
 /*   By: dpiza <dpiza@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/17 16:21:56 by dpiza             #+#    #+#             */
-/*   Updated: 2021/09/03 20:05:20 by dpiza            ###   ########.fr       */
+/*   Updated: 2021/09/03 22:04:09 by dpiza            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ int	is_flag(char c, t_flags *flags)
 {
 	if (c == '-')
 		flags->justify = TRUE;
-	else if (c == '0' 
-			&& flags->width == FALSE
-			&& flags->precision == FALSE 
-			&& flags->justify == FALSE)
+	else if (c == '0'
+		&& flags->width == FALSE
+		&& flags->precision == FALSE
+		&& flags->justify == FALSE)
 		flags->zerofill = 48;
 	else if (c == '+')
 		flags->plus = TRUE;
