@@ -39,7 +39,7 @@ clean:
 
 fclean: clean
 	$(RM) $(NAME)
-	rmdir $(OBJS_DIR)
+	rm -rf $(OBJS_DIR)
 
 re: fclean all
 

@@ -62,7 +62,7 @@ clean:
 fclean: clean
 	make -C $(LIBFT_DIR) fclean
 	$(RM) $(NAME)
-	rmdir $(OBJS_DIR)
+	rm -rf $(OBJS_DIR)
 
 re: fclean all
 
