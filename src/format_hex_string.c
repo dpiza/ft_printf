@@ -6,27 +6,50 @@
 /*   By: dpiza <dpiza@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/01 15:17:22 by dpiza             #+#    #+#             */
-/*   Updated: 2021/09/03 16:58:57 by dpiza            ###   ########.fr       */
+/*   Updated: 2021/09/04 01:46:18 by dpiza            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
+char	*zero_x(char *str, t_flags flags)
+{
+	char	*ret;
+
+	if (*str == '0' && ft_strlen(str) == 1)
+		ret = ft_strdup(str);
+	else if (flags.zero_x && flags.specifier == 'x')
+		ret = ft_strjoin("0x", str);
+	else if (flags.zero_x && flags.specifier == 'X')
+		ret = ft_strjoin("0X", str);
+	else
+		ret = ft_strdup(str);
+	return (ret);
+}
+
 char	*format_hex_width(char *str, t_flags flags)
 {
 	int		size;
 	int		str_len;
+	char	*tmp;
 	char	*ret;
 
-	str_len = ft_strlen(str);
+	tmp = zero_x(str, flags);
+	str_len = ft_strlen(tmp);
 	if (str_len >= flags.width)
 		size = str_len;
 	else
 		size = flags.width;
 	ret = ft_calloc((size + 1), sizeof(char));
 	ft_memset(ret, flags.zerofill, size);
-	ft_memcpy(ret + ((!flags.justify) * (size - str_len)), str, str_len);
+	ft_memcpy(ret + ((!flags.justify) * (size - str_len)), tmp, str_len);
 	ret[size] = '\0';
+	if (flags.zero_x && flags.zerofill == 48 && flags.width > str_len)
+	{
+		ret[1] = tmp[1];
+		ret[ft_strlen(ret) - str_len + 1] = 48;
+	}
+	free (tmp);
 	return (ret);
 }
 
@@ -51,7 +74,6 @@ char	*format_hex_precision(char *str, t_flags flags)
 char	*x_format_string(va_list args, t_flags flags)
 {
 	char			*str;
-	char			*prec;
 	char			*tmp;
 	char			*ret;
 	unsigned int	lint;
@@ -63,16 +85,9 @@ char	*x_format_string(va_list args, t_flags flags)
 		str = ft_nbr_base(lint, "0123456789abcdef");
 	else
 		str = ft_nbr_base(lint, "0123456789ABCDEF");
-	prec = format_hex_precision(str, flags);
-	if (flags.zero_x && flags.specifier == 'x' && lint)
-		tmp = ft_strjoin("0x", prec);
-	else if (flags.zero_x && lint)
-		tmp = ft_strjoin("0X", prec);
-	else
-		tmp = ft_strdup(prec);
+	tmp = format_hex_precision(str, flags);
 	ret = format_hex_width(tmp, flags);
 	free (str);
-	free (prec);
 	free (tmp);
 	return (ret);
 }
