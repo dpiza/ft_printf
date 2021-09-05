@@ -6,7 +6,7 @@
 /*   By: dpiza <dpiza@student.42sp.org.br>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/01 15:17:22 by dpiza             #+#    #+#             */
-/*   Updated: 2021/09/04 01:46:18 by dpiza            ###   ########.fr       */
+/*   Updated: 2021/09/04 21:54:28 by dpiza            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,17 @@ char	*zero_x(char *str, t_flags flags)
 	return (ret);
 }
 
-char	*format_hex_width(char *str, t_flags flags)
+char	*format_hex_width(char *str, t_flags flags, int lint)
 {
 	int		size;
 	int		str_len;
 	char	*tmp;
 	char	*ret;
 
-	tmp = zero_x(str, flags);
+	if (lint)
+		tmp = zero_x(str, flags);
+	else
+		tmp = ft_strdup(str);
 	str_len = ft_strlen(tmp);
 	if (str_len >= flags.width)
 		size = str_len;
@@ -86,7 +89,7 @@ char	*x_format_string(va_list args, t_flags flags)
 	else
 		str = ft_nbr_base(lint, "0123456789ABCDEF");
 	tmp = format_hex_precision(str, flags);
-	ret = format_hex_width(tmp, flags);
+	ret = format_hex_width(tmp, flags, lint);
 	free (str);
 	free (tmp);
 	return (ret);
@@ -107,7 +110,7 @@ char	*p_format_string(va_list args, t_flags flags)
 		str = ft_ullnbr_base((unsigned long long)arg, "0123456789abcdef");
 	prec = format_hex_precision(str, flags);
 	tmp = ft_strjoin("0x", prec);
-	ret = format_hex_width(tmp, flags);
+	ret = format_hex_width(tmp, flags, 1);
 	free (prec);
 	free (tmp);
 	free (str);
